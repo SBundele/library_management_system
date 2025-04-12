@@ -11,12 +11,12 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      validate: {
-        validator: function (value) {
-          return /^[a-zA-Z0-9]+$/.test(value); // Regex for alphanumeric
-        },
-        message: "Password must be alphanumeric",
-      },
+      // validate: {
+      //   validator: function (value) {
+      //     return /^[a-zA-Z0-9]+$/.test(value); // Regex for alphanumeric
+      //   },
+      //   message: "Password must be alphanumeric",
+      // },
     },
     role: {
       type: String,
