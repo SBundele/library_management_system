@@ -11,12 +11,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      // validate: {
-      //   validator: function (value) {
-      //     return /^[a-zA-Z0-9]+$/.test(value); // Regex for alphanumeric
-      //   },
-      //   message: "Password must be alphanumeric",
-      // },
     },
     role: {
       type: String,
@@ -31,20 +25,31 @@ const userSchema = new mongoose.Schema(
       type: String,
       unique: true,
       required: [true, "Email is required"],
-    },
-    borrowedBooks: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Book",
-      },
-    ],
+    }
   },
   { 
     timestamps: true, 
-    versionKey: false  
+    versionKey: false,
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true} 
  }
 );
+
+// ✅ Virtual field: borrowedBooks from BorrowingTransaction
+userSchema.virtual("borrowedBooks", {
+  ref: "BorrowingTransaction",
+  localField: "_id",
+  foreignField: "member",
+});
 
 // Create and export the model
 const User = mongoose.model("User", userSchema);
 module.exports = {User};
+
+
+// validate: {
+//   validator: function (value) {
+//     return /^[a-zA-Z0-9]+$/.test(value); // Regex for alphanumeric
+//   },
+//   message: "Password must be alphanumeric",
+// },

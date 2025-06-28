@@ -19,9 +19,7 @@ authRouter.post("/register", async (req, res) => {
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ error: "Username or email already in use" });
+      return res.status(400).json({ error: "Username or email already in use" });
     }
 
     // Hash the password using bcrypt

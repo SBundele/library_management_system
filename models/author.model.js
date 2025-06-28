@@ -10,19 +10,21 @@ const authorSchema = new mongoose.Schema(
     biography: { type: String },
     dateOfBirth: { type: Date },
     nationality: { type: String },
-    books: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Book", // Replace "Book" with the actual Book model name
-      },
-    ],
   },
-  { 
-    timestamps: true, 
-    versionKey: false 
+  {
+    timestamps: true,
+    versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
+authorSchema.virtual("books", {
+  ref: "Book",
+  localField: "_id",
+  foreignField: "author"
+})
+
 // Create and export the Author model
-const Author = mongoose.model("Author", authorSchema);
-module.exports = Author;
+const Author = mongoose.model("author", authorSchema);
+module.exports = {Author};

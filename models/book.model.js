@@ -33,7 +33,7 @@ const bookSchema = new mongoose.Schema(
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Author", // Replace "Author" with the name of your Author model
+      ref: "author", // Replace "Author" with the name of your Author model
     },
     borrowedBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -48,4 +48,4 @@ const bookSchema = new mongoose.Schema(
 
 // Create and export the Book model
 const Book = mongoose.model("Book", bookSchema);
-module.exports = Book;
+module.exports = { Book };

@@ -37,8 +37,5 @@ const borrowingTransactionSchema = new mongoose.Schema(
 ); // Automatically adds createdAt and updatedAt fields
 
 // Create and export the BorrowingTransaction model
-const BorrowingTransaction = mongoose.model(
-  "BorrowingTransaction",
-  borrowingTransactionSchema
-);
+const BorrowingTransaction = mongoose.model("BorrowingTransaction", borrowingTransactionSchema);
 module.exports = BorrowingTransaction;
